@@ -19,18 +19,22 @@ def test_on_incorrect_json():
 
     assert formatted_data is None
 
-def test_input_type():
-    with pytest.raises(TypeError):
-        JSON_reader.process(123)
-
 def test_logging_on_success(caplog):
     with caplog.at_level(logging.INFO):
         JSON_reader.process(CORRECT_JSON)
 
     assert "JSON read" in caplog.messages
 
-def test_logging_on_error(caplog):
+def test_logging_on_incorrect_json(caplog):
     with caplog.at_level(logging.ERROR):
         JSON_reader.process(INCORRECT_JSON)
 
-    assert "An error occurred with JSON structure" in caplog.messages
+    assert ("An error occurred with JSON structure: Expecting ',' "
+            "delimiter: line 1 column 19 (char 18)") in caplog.messages
+
+def test_logging_on_type_error(caplog):
+    with caplog.at_level(logging.ERROR):
+        JSON_reader.process(123)
+
+    assert ("Type error during conversion: the JSON object must be "
+            "str, bytes or bytearray, not int") in caplog.messages
