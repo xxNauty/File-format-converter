@@ -1,4 +1,4 @@
-name: Run tests on Pull request
+name: Run tests on every pull request
 
 on:
   pull_request:
