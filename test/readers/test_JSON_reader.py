@@ -1,4 +1,3 @@
-import pytest
 import logging
 
 from readers import JSON_reader
