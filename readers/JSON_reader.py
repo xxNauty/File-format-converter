@@ -9,8 +9,8 @@ def process(data: str) -> dict|None:
         logging.info("JSON read")
         return formatted_data
     except json.JSONDecodeError as e:
-        logging.error("An error occurred with JSON structure: %s", e)
+        logging.error(f"An error occurred with JSON structure: {e}")
         return None
     except TypeError as e:
-        logging.error("Type error during conversion: %s", e)
+        logging.error(f"Type error during conversion: {e}")
         return None
