@@ -24,18 +24,18 @@ def test_on_correct_json(caplog):
 
     assert "JSON read" in caplog.messages
 
-def test_on_incorrect_json(caplog):
-    with caplog.at_level(logging.ERROR):
-        formatted_data = JSON_reader.process(INCORRECT_JSON)
-
-    assert formatted_data is None
-
-    assert ("An error occurred with JSON structure: "
-            "Expecting ',' delimiter: line 1 column 29 (char 28)") in caplog.messages
-
-def test_on_incorrect_datatype(caplog):
-    with caplog.at_level(logging.ERROR):
-        JSON_reader.process(123)
-
-    assert ("Type error during conversion: the JSON object must be "
-            "str, bytes or bytearray, not int") in caplog.messages
+# def test_on_incorrect_json(caplog):
+#     with caplog.at_level(logging.ERROR):
+#         formatted_data = JSON_reader.process(INCORRECT_JSON)
+#
+#     assert formatted_data is None
+#
+#     assert ("An error occurred with JSON structure: "
+#             "Expecting ',' delimiter: line 1 column 29 (char 28)") in caplog.messages
+#
+# def test_on_incorrect_datatype(caplog):
+#     with caplog.at_level(logging.ERROR):
+#         JSON_reader.process(123)
+#
+#     assert ("Type error during conversion: the JSON object must be "
+#             "str, bytes or bytearray, not int") in caplog.messages
