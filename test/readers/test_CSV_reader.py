@@ -18,8 +18,8 @@ def test_on_correct_csv(caplog):
 
     assert formatted_data[0]['name.first'] == 'Alice'
     assert formatted_data[0]['name.last'] == 'White'
-    # assert formatted_data[0]['age'] == 30
-    # assert formatted_data[0]['active'] == True
+    assert formatted_data[0]['age'] == 30
+    assert formatted_data[0]['active'] == True
 
     assert "CSV read" in caplog.messages
 

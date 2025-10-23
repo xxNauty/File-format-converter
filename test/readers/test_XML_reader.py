@@ -19,9 +19,8 @@ def test_on_correct_xml(caplog):
 
     assert formatted_data['person']['name']['first'] == "Alice"
     assert formatted_data['person']['name']['last'] == "White"
-    # assert formatted_data['person']['age'] == 30
-    # assert formatted_data['person']['active'] == True
-    # TODO: do naprawy
+    assert formatted_data['person']['age'] == 30
+    assert formatted_data['person']['active'] == True
 
     assert "XML read" in caplog.messages
 
