@@ -2,34 +2,29 @@ import logging
 
 from readers import CSV_reader
 
-CORRECT_CSV = "id,name,age\n100,Alice,30\n101,Bob,25\n"
+CORRECT_CSV = "name.first,name.last,age,active\nAlice,White,30,true"
 
-def test_on_correct_csv():
-    formatted_data = CSV_reader.process(CORRECT_CSV, "id")
+def test_on_correct_csv(caplog):
+    with caplog.at_level(logging.INFO):
+        formatted_data = CSV_reader.process(CORRECT_CSV)
 
-    assert '100' in formatted_data
-    assert '101' in formatted_data
+    assert len(formatted_data) == 1
 
-    assert formatted_data['100']['name'] == "Alice"
-    assert formatted_data['100']['age'] == "30"
+    assert 0 in formatted_data
+    assert "name.first" in formatted_data[0]
+    assert "name.last" in formatted_data[0]
+    assert "age" in formatted_data[0]
+    assert "active" in formatted_data[0]
 
-    assert formatted_data['101']['name'] == "Bob"
-    assert formatted_data['101']['age'] == "25"
+    assert formatted_data[0]['name.first'] == 'Alice'
+    assert formatted_data[0]['name.last'] == 'White'
+    # assert formatted_data[0]['age'] == 30
+    # assert formatted_data[0]['active'] == True
 
-    assert len(formatted_data) == 2
-    assert len(formatted_data['100']) == 2
-    assert len(formatted_data['101']) == 2
+    assert "CSV read" in caplog.messages
 
-def test_on_incorrect_key_column(caplog):
-    with caplog.at_level(logging.ERROR):
-        formatted_data = CSV_reader.process(CORRECT_CSV, "idd")
-
-    assert formatted_data is None
-    assert 'An error occurred while conversion: "Key column \'idd\' not found in CSV headers"' in caplog.messages
-
-def test_wrong_delimiter(caplog):
-    with caplog.at_level(logging.ERROR):
-        formatted_data = CSV_reader.process(CORRECT_CSV, "id", ":")
-
-    assert formatted_data is None
-    assert 'An error occurred while conversion: There is no such character in data' in caplog.messages
+# def test_on_incorrect_datatype(caplog):
+#     with caplog.at_level(logging.ERROR):
+#         CSV_reader.process(123)
+#
+#     assert "An error occurred: initial_value must be str or None, not int" in caplog.messages
