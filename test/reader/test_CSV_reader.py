@@ -1,6 +1,6 @@
 import logging
 
-from readers import CSV_reader
+from reader import CSV_reader
 
 CORRECT_CSV = "name.first,name.last,age,active\nAlice,White,30,true"
 
@@ -22,9 +22,3 @@ def test_on_correct_csv(caplog):
     assert formatted_data[0]['active'] == True
 
     assert "CSV read" in caplog.messages
-
-# def test_on_incorrect_datatype(caplog):
-#     with caplog.at_level(logging.ERROR):
-#         CSV_reader.process(123)
-#
-#     assert "An error occurred: initial_value must be str or None, not int" in caplog.messages

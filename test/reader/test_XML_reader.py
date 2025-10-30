@@ -1,6 +1,6 @@
 import logging
 
-from readers import XML_reader
+from reader import XML_reader
 
 CORRECT_XML = "<person><name><first>Alice</first><last>White</last></name><age>30</age><active>true</active></person>"
 INCORRECT_XML = "<person>name><first>Alice</first><last>White</last><name><age>30</age><active>true</active></person>"

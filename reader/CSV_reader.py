@@ -6,7 +6,7 @@ from io import StringIO
 
 logging.basicConfig(level=logging.INFO)
 
-def process(data: str) -> dict|None:
+def process(data: str) -> dict:
     rows = csv.DictReader(StringIO(data))
     result = {}
     for i, row in enumerate(rows):
