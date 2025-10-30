@@ -1,6 +1,6 @@
 import logging
 
-from readers import YAML_reader
+from reader import YAML_reader
 
 CORRECT_YAML = (
 """

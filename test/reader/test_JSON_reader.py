@@ -1,6 +1,6 @@
 import logging
 
-from readers import JSON_reader
+from reader import JSON_reader
 
 CORRECT_JSON = '{"name": {"first": "Alice", "last": "White"}, "age": 30, "active": true}'
 INCORRECT_JSON = '{"name": {"first": "Alice, "last" "White"}, "age": 30 "active": true}'

@@ -1,6 +1,6 @@
 import logging
 
-from readers import TOML_reader
+from reader import TOML_reader
 
 CORRECT_TOML = """
 age = 30
